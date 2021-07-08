@@ -1,11 +1,11 @@
-class CurrenyAPI {
+class Currency {
   String _time;
   String _assetIdBase;
   String _assetIdQuote;
   double _rate;
   List<SrcSideBase> _srcSideBase;
 
-  CurrenyAPI(
+  Currency(
       {String time,
         String assetIdBase,
         String assetIdQuote,
@@ -29,7 +29,7 @@ class CurrenyAPI {
   List<SrcSideBase> get srcSideBase => _srcSideBase;
   set srcSideBase(List<SrcSideBase> srcSideBase) => _srcSideBase = srcSideBase;
 
-  CurrenyAPI.fromJson(Map<String, dynamic> json) {
+  Currency.fromJson(Map<String, dynamic> json) {
     _time = json['time'];
     _assetIdBase = json['asset_id_base'];
     _assetIdQuote = json['asset_id_quote'];
