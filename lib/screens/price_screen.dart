@@ -9,6 +9,7 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   MockController _mockController;
   List<DropdownMenuItem<String>> _currencyList;
+  String rate ="rate";
 
   String selectedCurrency;
 
@@ -19,7 +20,8 @@ class _PriceScreenState extends State<PriceScreen> {
     _currencyList = [];
     _getCurrencyList();
   }
-  
+
+
 
   void _getCurrencyList(){
 
@@ -32,19 +34,12 @@ class _PriceScreenState extends State<PriceScreen> {
       _currencyList.add(newItem);
     }
 
-//by using map
-    /*_currencyList = _mockController.getCurrencies().map((String value){
-      return DropdownMenuItem<String>(
-        value : value,
-        child:Text(value)
-      );
-    }).toList();*/
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Coin Ticker'),
+        title: Center(child: Text('Coin Ticker')),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,6 +66,7 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
             ),
           ),
+
           Container(
             height: 90.0,
             alignment: Alignment.center,
