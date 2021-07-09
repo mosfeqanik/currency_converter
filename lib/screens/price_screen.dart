@@ -29,7 +29,7 @@ class _PriceScreenState extends State<PriceScreen> {
 
   void getCurrencyRate() async {
     try {
-      _currency = await _currencyController.getCurrency();
+      _currency = await _currencyController.getCurrency(selectedCurrency);
       setState(() {
         isLoading =false;
       });
@@ -57,7 +57,7 @@ class _PriceScreenState extends State<PriceScreen> {
       appBar: AppBar(
         title: Center(child: Text('Coin Ticker')),
       ),
-      body: Column(
+      body: !isLoading ? Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -71,14 +71,23 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
+                child: _currency != null ?
+                Text(
+                  '1 $selectedCurrency = ${_currency.rate} BDT',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ):
+                Text(
                   '1 USD = ? BDT',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
                   ),
-                ),
+                )
               ),
             ),
           ),
@@ -101,7 +110,9 @@ class _PriceScreenState extends State<PriceScreen> {
               isExpanded: false,
               value: selectedCurrency,
               onChanged: (value){
+                getCurrencyRate();
                 setState(() {
+                  isLoading = true;
                   selectedCurrency = value;
                 });
               },
@@ -110,7 +121,12 @@ class _PriceScreenState extends State<PriceScreen> {
             ),
           ),
         ],
+      )
+          : Center(
+            child: CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
       ),
+          )
     );
   }
 }
