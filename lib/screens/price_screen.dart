@@ -1,4 +1,6 @@
+import 'package:currency_converter/controller/CurrencyController.dart';
 import 'package:currency_converter/controller/mock_controller.dart';
+import 'package:currency_converter/models/Currency.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {
@@ -9,32 +11,46 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   MockController _mockController;
   List<DropdownMenuItem<String>> _currencyList;
-  String rate ="rate";
-
+  String rate = "rate";
   String selectedCurrency;
+  bool isLoading;
+  CurrencyController _currencyController;
+  Currency _currency;
 
   @override
   void initState() {
     super.initState();
     _mockController = MockController();
     _currencyList = [];
-    _getCurrencyList();
+    _getCurrencyMockList();
+    _currencyController = CurrencyController();
+    isLoading =false;
   }
 
+  void getCurrencyRate() async {
+    try {
+      _currency = await _currencyController.getCurrency();
+      setState(() {
+        isLoading =false;
+      });
+    } catch (error) {
+      setState(() {
+        isLoading =false;
+      });
+    }
+  }
 
-
-  void _getCurrencyList(){
-
+  void _getCurrencyMockList() {
     //by using foreach loop
-    for(String currency in _mockController.getCurrencies()){
+    for (String currency in _mockController.getCurrencies()) {
       var newItem = DropdownMenuItem(
-          child: Text(currency),
+        child: Text(currency),
         value: currency,
       );
       _currencyList.add(newItem);
     }
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,8 +93,8 @@ class _PriceScreenState extends State<PriceScreen> {
                 child: Text(
                   'Select',
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400
                   ),
                 ),
               ),

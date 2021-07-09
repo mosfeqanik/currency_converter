@@ -5,7 +5,7 @@ class NetworkCall {
   //currency
   Future<String> loadCurrencyData() async {
     //URL
-    String apiUri = ApiConstant.Get_currency + '?apikey=${ApiConstant.Api_Key}';
+    String apiUri = ApiConstant.Get_Currency + '?apikey=${ApiConstant.Api_Key}';
     //URL to uri
     Uri url = Uri.parse(apiUri);
     //uri to response
