@@ -1,6 +1,7 @@
-import 'package:currency_converter/controller/CurrencyController.dart';
-import 'package:currency_converter/controller/mock_controller.dart';
+
 import 'package:currency_converter/models/Currency.dart';
+import 'package:currency_converter/view_model/CurrencyController.dart';
+import 'package:currency_converter/view_model/mock_controller.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {

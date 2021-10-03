@@ -1,5 +1,6 @@
+import 'package:currency_converter/views/price_screen.dart';
 import 'package:flutter/material.dart';
-import 'screens/price_screen.dart';
+
 
 void main() => runApp(MyApp());
 
